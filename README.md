@@ -36,5 +36,8 @@ b) On Linux/macOS:
    python3 -m venv venv
    source venv/bin/activate
 
+3. **Install the required dependencies**:
+The project dependencies are listed in requirements.txt. Install them using the following command:
+
 
    
