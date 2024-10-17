@@ -26,11 +26,12 @@ This project implements a **Rule Engine** that parses rules using an Abstract Sy
    cd Rule-Engine-with-AST
 2. **Set up a virtual environment**
    It’s a good practice to use a virtual environment to manage dependencies specific to your project. Here’s how to set it up:
-   a) On Windows
+a) On Windows
    ```bash
    python -m venv venv
    venv\Scripts\activate
-   b) On Linux/macOS:
+   
+b) On Linux/macOS:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
