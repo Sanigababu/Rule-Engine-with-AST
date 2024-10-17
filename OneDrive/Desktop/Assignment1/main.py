@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from ast_parser import parse_rule, combine_rules, evaluate_rule
+from ast_parser import parse_rule, combine_rules, evaluate_rule, format_ast
 from database import save_rule, get_rule
 import json
 
@@ -13,7 +13,11 @@ def create_rule():
         rule_string = request.json.get('rule')  # Rule in string format from the request body
         ast = parse_rule(rule_string)          # Parse the rule string to AST
         rule_id = save_rule(ast)               # Save the rule to the database (optional)
-        return jsonify({"ast": ast, "rule_id": rule_id}), 201
+        return jsonify({
+            "ast": ast.to_dict(), 
+            "rule_id": rule_id,
+            "formatted_ast": format_ast(ast)
+            }), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -39,7 +43,14 @@ def evaluate():
         return jsonify({"result": result}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+    
+
 
 # Start the Flask server
 if __name__ == '__main__':
+    # Example Rule for Testing
+    rule_string = "age > 30 AND salary > 50000"
+    ast = parse_rule(rule_string)
+    print("AST Representation:", ast.to_dict())
+    print("Formatted AST:", format_ast(ast))
     app.run(debug=True)

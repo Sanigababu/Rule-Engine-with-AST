@@ -1,0 +1,5 @@
+Python
+SQLAlchemy
+Requests
+Python-dotenv
+Unittest
