@@ -2,11 +2,12 @@ import re
 
 # Node class representing each element in the AST
 class Node:
-    def __init__(self, node_type, left=None, right=None, value=None):
+    def __init__(self, node_type, left=None, right=None, value=None, is_function=None):
         self.type = node_type  # "operator" or "operand"
         self.left = left       # Left child for operator nodes
         self.right = right     # Right child for operator nodes
         self.value = value     # Operand value (e.g., "age > 30")
+        self.is_function = is_function  # New attribute to check if it's a function
 
 # Parse rule string into an AST
 def parse_rule(rule_string):
@@ -48,6 +49,13 @@ def parse_rule(rule_string):
 
     return build_ast(tokens)
 
+ALLOWED_ATTRIBUTES = {"age", "department", "salary", "experience"} #validation for attributes
+
+def validate_attributes(data):
+    for key in data.keys():
+        if key not in ALLOWED_ATTRIBUTES:
+            raise ValueError(f"Invalid attribute: {key}")
+
 def evaluate_rule(ast, data):
     if ast.type == 'operand':
         parts = ast.value.split()
@@ -80,3 +88,19 @@ def combine_rules(asts):
     for ast in asts[1:]:
         combined = Node('operator', combined, ast, value='AND')
     return combined
+
+#Error handling
+def create_rule(rule_string):
+    if not rule_string:
+        raise ValueError("Rule string cannot be empty.")
+    
+    # Basic validation for operators
+    valid_operators = ['>', '<', '=', 'AND', 'OR']
+    tokens = re.findall(r'\w+|[><=!]+|AND|OR|\(|\)', rule_string)
+    
+    for token in tokens:
+        if token not in valid_operators and not token.isidentifier():
+            raise ValueError(f"Invalid token in rule: {token}")
+
+    return parse_rule(rule_string)
+
