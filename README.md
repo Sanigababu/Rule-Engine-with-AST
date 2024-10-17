@@ -1,4 +1,4 @@
-# Rule-Engine-with-AST
+
 # Rule Engine with Abstract Syntax Tree (AST)
 
 ## Project Overview
@@ -14,7 +14,7 @@ This project implements a **Rule Engine** that parses rules using an Abstract Sy
 ## Installation Instructions
 
 ### Prerequisites
-- **Python 3.x** is required.
+- **Python 3.10.0** is required.
 - **pip** for installing Python packages.
 - Optional: **Docker** for containerization.
 
