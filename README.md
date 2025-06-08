@@ -62,6 +62,11 @@ Once the dependencies are installed, run the application:
 ```bash
 python main.py
 ```
+### 5.Test the API Endpoint: 
+Use PowerShell or another command-line tool to make a POST request to your Flask endpoint:
+```python
+Invoke-RestMethod -Uri http://localhost:5000/create_rule -Method POST -ContentType "application/json" -Body '{"rule": "age > 30 AND salary > 50000"}'
+```
 ## Usage Instructions
 ### 1.Define a Rule:
 Use the following Python code to define a rule:
